@@ -16,6 +16,8 @@
 from __future__ import print_function
 
 import logging
+import time
+import pandas as pd
 
 import grpc
 import grpc_analise_pb2
@@ -25,10 +27,34 @@ import grpc_analise_pb2_grpc
 def run():
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = grpc_analise_pb2_grpc.MensageiroStub(channel)
-        response = stub.EnviarMensagemVazia(grpc_analise_pb2.Resposta_Request_Void())
-        response = stub.EnviarMensagemLong(grpc_analise_pb2.Resposta_Request_Long(message=6889*6889))
-        response = stub.EnviarMensagemOitoLong(grpc_analise_pb2.Resposta_Request_Long(message=6889*6889))
-        response = stub.EnviarMensagemString(grpc_analise_pb2.Resposta_Request_String(message='6889'*6889))
+        duration_list = list()
+        for x in range(10):
+            start_time = time.time()
+            response = stub.EnviarMensagemVazia(grpc_analise_pb2.Resposta_Request_Void())
+            duration = time.time() - start_time
+            print(f"A operação levou {duration} segundos para ser concluída")
+            duration_list.append({'experimento':'void', 'duracao':duration})
+
+
+            start_time = time.time()
+            response = stub.EnviarMensagemLong(grpc_analise_pb2.Resposta_Request_Long(message=6889*6889))
+            duration = time.time() - start_time
+            print(f"A operação levou {duration} segundos para ser concluída")
+            duration_list.append({'experimento':'long', 'duracao':duration})
+
+            start_time = time.time()
+            response = stub.EnviarMensagemOitoLong(grpc_analise_pb2.Resposta_Request_Long(message=6889*6889))
+            duration = time.time() - start_time
+            print(f"A operação levou {duration} segundos para ser concluída")
+            duration_list.append({'experimento':'oito_long', 'duracao':duration})
+            
+            start_time = time.time()
+            response = stub.EnviarMensagemString(grpc_analise_pb2.Resposta_Request_String(message='6889'*6889))
+            duration = time.time() - start_time
+            print(f"A operação levou {duration} segundos para ser concluída")
+            duration_list.append({'experimento':'string', 'duracao':duration})
+        
+        pd.DataFrame(duration_list).to_csv('analise_grpc.csv')
 
 
 if __name__ == '__main__':

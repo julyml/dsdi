@@ -27,27 +27,15 @@ import grpc_analise_pb2_grpc
 class Mensageiro(grpc_analise_pb2_grpc.MensageiroServicer):
 
   def EnviarMensagemVazia(self, request, context):
-    start_time = time.time()
-    duration = time.time() - start_time
-    print(f"A operação levou {duration:.2f} segundos para ser concluída")
     return grpc_analise_pb2.Resposta_Request_Void()
   
   def EnviarMensagemLong(self, request, context):
-    start_time = time.time()
-    duration = time.time() - start_time
-    print(f"A operação levou {duration:.2f} segundos para ser concluída")
     return grpc_analise_pb2.Resposta_Request_Long()
   
   def EnviarMensagemOitoLong(self, request, context):
-    start_time = time.time()
-    duration =  time.time() - start_time
-    print(f"A operação levou {duration:.2f} segundos para ser concluída")
     return grpc_analise_pb2.Resposta_Request_Long()
   
   def EnviarMensagemString(self, request, context):
-    start_time = time.time()
-    duration = time.time() - start_time
-    print(f"A operação levou {duration:.2f} segundos para ser concluída")
     return grpc_analise_pb2.Resposta_Request_String()
 
 
