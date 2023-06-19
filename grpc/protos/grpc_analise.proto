@@ -15,26 +15,31 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
-option objc_class_prefix = "HLW";
+option java_package = "io.grpc.analise";
+option java_outer_classname = "MensageiroProto";
+option objc_class_prefix = "Mens";
 
-package helloworld;
+package mensageiro;
 
 // The greeting service definition.
-service Greeter {
+service Mensageiro {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
-  // Sends another greeting
-  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+  rpc EnviarMensagemVazia (Resposta_Request_Void) returns (Resposta_Request_Void) {}
+  rpc EnviarMensagemLong (Resposta_Request_Long) returns (Resposta_Request_Long) {}
+  rpc EnviarMensagemOitoLong (Resposta_Request_Long) returns (Resposta_Request_Long) {}
+  rpc EnviarMensagemString (Resposta_Request_String) returns (Resposta_Request_String) {}  
 }
 
 // The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-}
+message Resposta_Request_Void {}
 
 // The response message containing the greetings
-message HelloReply {
+message Resposta_Request_Long {
+  float message = 1;
+}
+
+message Resposta_Request_String {
   string message = 1;
 }
+
+

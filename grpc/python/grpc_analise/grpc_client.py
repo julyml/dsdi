@@ -18,17 +18,17 @@ from __future__ import print_function
 import logging
 
 import grpc
-import helloworld_pb2
-import helloworld_pb2_grpc
+import grpc_analise_pb2
+import grpc_analise_pb2_grpc
 
 
 def run():
     with grpc.insecure_channel('localhost:50051') as channel:
-        stub = helloworld_pb2_grpc.GreeterStub(channel)
-        response = stub.SayHello(helloworld_pb2.HelloRequest(name='you'))
-        print("Greeter client received: " + response.message)
-        response = stub.SayHelloAgain(helloworld_pb2.HelloRequest(name='you'))
-        print("Greeter client received: " + response.message)
+        stub = grpc_analise_pb2_grpc.MensageiroStub(channel)
+        response = stub.EnviarMensagemVazia(grpc_analise_pb2.Resposta_Request_Void())
+        response = stub.EnviarMensagemLong(grpc_analise_pb2.Resposta_Request_Long(message=6889*6889))
+        response = stub.EnviarMensagemOitoLong(grpc_analise_pb2.Resposta_Request_Long(message=6889*6889))
+        response = stub.EnviarMensagemString(grpc_analise_pb2.Resposta_Request_String(message='6889'*6889))
 
 
 if __name__ == '__main__':
