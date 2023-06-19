@@ -29,7 +29,7 @@ with xmlrpc.client.ServerProxy("http://localhost:8000/") as proxy:
         print(f"A operação levou {duration} segundos para ser concluída")
         duration_list.append({'experimento':'string', 'duracao':duration})
     
-    pd.DataFrame(duration_list).to_csv('analise_xml_rpc.csv')
+    pd.DataFrame(duration_list).to_csv('analise_xml_rpc.csv',index=False)
     
     
     

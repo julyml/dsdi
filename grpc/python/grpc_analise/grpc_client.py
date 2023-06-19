@@ -54,7 +54,7 @@ def run():
             print(f"A operação levou {duration} segundos para ser concluída")
             duration_list.append({'experimento':'string', 'duracao':duration})
         
-        pd.DataFrame(duration_list).to_csv('analise_grpc.csv')
+        pd.DataFrame(duration_list).to_csv('analise_grpc.csv',index=False)
 
 
 if __name__ == '__main__':
